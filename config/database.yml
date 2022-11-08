@@ -47,13 +47,9 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: furima_38201_production
-  username: furima_38201
-  password: <%= ENV['FURIMA_38201_DATABASE_PASSWORD'] %>
 
-  default: &default
+
+default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
@@ -63,7 +59,7 @@ development:
   username: root
   password:
   host: localhost
-  database: ajax_app_development
+  database: furima_38201_development
 
 test:
   <<: *default
@@ -71,7 +67,7 @@ test:
   username: root
   password:
   host: localhost
-  database: ajax_app_test
+  database: furima_38201_test
 
 production:
   <<: *default
