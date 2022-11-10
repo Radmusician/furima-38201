@@ -44,18 +44,22 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
+      it 'メールアドレスに@を含まない場合は登録できない' do
+        @user.email = 'hoge'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
       it 'メールアドレスが重複していると登録できない' do
         @user.save
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        # binding.pry
         expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
       it 'パスワードが空欄だと登録できない' do
         @user.password = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password can't be blank", 'Password Include both letters and numbers', "Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password can't be blank")
       end
       it 'パスワード（確認含む）が5文字以下だと登録できない' do
         @user.password = '123ab'
@@ -92,6 +96,26 @@ RSpec.describe User, type: :model do
       end
       it '名前のフリガナは全角（カタカナ）でないと登録できない' do
         @user.first_name_kana = 'たんじろう'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('First name kana is invalid')
+      end
+      it '名字の全角（漢字・ひらがな・カタカナ）が空欄だと登録できない' do
+        @user.last_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name is invalid')
+      end
+      it '名前の全角（漢字・ひらがな・カタカナ）が空欄だと登録できない' do
+        @user.first_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include('First name is invalid')
+      end
+      it '名字のフリガナは全角（カタカナ）が空欄だと登録できない' do
+        @user.last_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana is invalid')
+      end
+      it '名前のフリガナは全角（カタカナ）が空欄だと登録できない' do
+        @user.first_name_kana = ''
         @user.valid?
         expect(@user.errors.full_messages).to include('First name kana is invalid')
       end
