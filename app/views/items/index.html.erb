@@ -124,7 +124,7 @@
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
     <div class="subtitle" >
-    <%= link_to '新規投稿商品', new_item_path , class: "subtitle" %>
+    <%# link_to '新規投稿商品', new_item_path , class: "subtitle" %>
     </div>
     <ul class='item-lists'>
 
@@ -135,11 +135,11 @@
         <div class='item-img-content'>
         <%= image_tag item.image.variant(resize: '500x500'), class: "item-img" if item.image.attached? %>
           <%# 商品が売れていればsold outを表示しましょう %>
-          <%# <% if item.order != nil %> %>
+          <%# if item.order != nil %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
-          <%# <% end %> %>
+          <%# end %>
           <%# //商品が売れていればsold outを表示しましょう %>
 
         </div>
