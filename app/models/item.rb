@@ -14,6 +14,7 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
+    validates :user_id
     validates :name
     validates :description
     validates :category_id
