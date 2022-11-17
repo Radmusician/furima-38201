@@ -14,7 +14,6 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
-    #user_idはアソシエーションで既に記述されているので不要
     validates :name
     validates :description
     validates :category_id
