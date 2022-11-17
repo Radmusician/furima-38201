@@ -30,6 +30,7 @@
      <%= link_to "商品の編集", '#' , method: :get, class: "item-red-btn" %>
      <p class="or-text">or</p>
      <%= link_to "削除", '#' , method: :delete, class:"item-destroy" %>
+    <% else %>
     <%# まだ購入していない場合は売れ切れを表示 %>
 
     <%# 出品者以外でまだ購入していない場合は購入画面を表示 %>
