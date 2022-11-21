@@ -27,12 +27,10 @@
   <% if user_signed_in? %> 
     <%# 出品者かつまだ購入していない場合は編集、削除を表示を商品購入機能時に実装すること %>
     <% if current_user.id == @item.user_id then %> 
-     <%= link_to "商品の編集", '#' , method: :get, class: "item-red-btn" %>
+     <%= link_to "商品の編集", edit_item_path(@item) , method: :get, class: "item-red-btn" %>
      <p class="or-text">or</p>
      <%= link_to "削除", '#' , method: :delete, class:"item-destroy" %>
     <% else %>
-    <%# まだ購入していない場合は売れ切れを表示 %>
-
     <%# 出品者以外でまだ購入していない場合は購入画面を表示 %>
      <%= link_to "購入画面に進む", '#' ,class:"item-red-btn"%>
     <% end %>
