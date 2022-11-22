@@ -21,11 +21,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    # if @item.user_id == current_user.id
-    # else
-    #   redirect_to root_path
-    # end
-    # こちらの記述の方が簡潔
     unless @item.user_id == current_user.id
       redirect_to root_path
     end
@@ -33,7 +28,6 @@ class ItemsController < ApplicationController
   
   def update
     if @item.update(item_params)
-    # if @item.valid?
       redirect_to item_path
     else
       render 'edit'
