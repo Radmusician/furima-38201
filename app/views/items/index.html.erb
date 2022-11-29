@@ -134,13 +134,11 @@
         <div class='item-img-content'>
         <%= image_tag item.image.variant(resize: '500x500'), class: "item-img" if item.image.attached? %> 
 
-          <%# 商品が売れていればsold outの表示を商品購入機能時に実装する %>
-          <%# <% if item.order != nil %> 
+          <% if item.order != nil %> 
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
-          <%# end %>
-          <%# //商品が売れていればsold outを表示しましょう %>
+          <% end %>
 
         </div>
         <div class='item-info'>
