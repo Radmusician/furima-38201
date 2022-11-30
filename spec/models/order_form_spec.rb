@@ -10,14 +10,8 @@ RSpec.describe OrderForm, type: :model do
       it 'すべての値が正しく入力されていれば保存できる' do
         expect(@order_form).to be_valid
       end
-      it 'user_idが空でなければ保存できる' do
-        @order_form.user_id = 1
-        expect(@order_form).to be_valid
-      end
-      it 'item_idが空でなければ保存できる' do
-        @order_form.item_id = 1
-        expect(@order_form).to be_valid
-      end
+      
+      
       it '郵便番号が「3桁＋ハイフン＋4桁」の組み合わせであれば保存できる' do
         @order_form.postcode = '123-4560'
         expect(@order_form).to be_valid
@@ -38,19 +32,23 @@ RSpec.describe OrderForm, type: :model do
         @order_form.phone_number = 12_345_678_910
         expect(@order_form).to be_valid
       end
+      it '建物名は空でも保存できる' do
+        @order_form.building = ''
+        expect(@order_form).to be_valid
+      end
     end
 
     context '配送先情報の保存ができないとき' do
-      it 'user_idが空だと保存できない' do
-        @order_form.user_id = nil
-        @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("User can't be blank")
-      end
-      it 'item_idが空だと保存できない' do
-        @order_form.item_id = nil
-        @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Item can't be blank")
-      end
+      # it 'user_idが空だと保存できない' do
+      #   @order_form.user_id = nil
+      #   @order_form.valid?
+      #   expect(@order_form.errors.full_messages).to include("User can't be blank")
+      # end
+      # it 'item_idが空だと保存できない' do
+      #   @order_form.item_id = nil
+      #   @order_form.valid?
+      #   expect(@order_form.errors.full_messages).to include("Item can't be blank")
+      # end
       it '郵便番号が空だと保存できない' do
         @order_form.postcode = nil
         @order_form.valid?
@@ -100,6 +98,11 @@ RSpec.describe OrderForm, type: :model do
         @order_form.token = nil
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Token can't be blank")
+      end
+      it '電話番号は9桁以下では保存できない' do
+        @order_form.phone_number = 12_345_678_9
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include('Phone number is invalid')
       end
     end
   end

@@ -25,14 +25,6 @@ class ItemsController < ApplicationController
       redirect_to root_path
     end
   end
-  
-  # def update
-  #   if @item.update(item_params)
-  #     redirect_to item_path
-  #   else
-  #     render 'edit'
-  #   end
-  # end
 
   def update
     @item.update(item_params)
@@ -47,16 +39,6 @@ class ItemsController < ApplicationController
 
   def show
   end
-
-  # def destroy
-  #   item = Item.find(params[:id])
-  #   if item.user_id == current_user.id
-  #     item.destroy
-  #     redirect_to root_path
-  #   else
-  #     redirect_to root_path
-  #   end
-  # end
 
   def destroy
     if @item.user_id == current_user.id
